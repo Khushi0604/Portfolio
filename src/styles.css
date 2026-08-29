@@ -40,20 +40,20 @@
   --color-ring: var(--ring);
   --color-ring-offset-background: var(--background);
 
-  /* Direction-specific tokens */
-  --color-ink: #0a0a0a;
-  --color-paper: #fafafa;
-  --color-charcoal: #121212;
-  --color-surface: #171717;
-  --color-surface-elevated: #1f1f1f;
+  /* Direction-specific tokens (theme-aware) */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-charcoal: var(--charcoal);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
   --color-indigo: #6366f1;
-  --color-indigo-light: #818cf8;
+  --color-indigo-light: var(--indigo-light);
   --color-cyan: #06b6d4;
-  --color-cyan-light: #22d3ee;
-  --color-slate: #a1a1aa;
-  --color-slate-dim: #71717a;
-  --color-glass-border: rgba(255, 255, 255, 0.08);
-  --color-glass-highlight: rgba(255, 255, 255, 0.04);
+  --color-cyan-light: var(--cyan-light);
+  --color-slate: var(--slate);
+  --color-slate-dim: var(--slate-dim);
+  --color-glass-border: var(--glass-border);
+  --color-glass-highlight: var(--glass-highlight);
 
   --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-serif: "Inter", system-ui, sans-serif;
@@ -61,25 +61,63 @@
 
 :root {
   --radius: 0.75rem;
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --card: rgba(23, 23, 23, 0.6);
-  --card-foreground: #fafafa;
-  --popover: #171717;
-  --popover-foreground: #fafafa;
+
+  /* Dark (default) */
+  --ink: #0a0a0a;
+  --paper: #fafafa;
+  --charcoal: #121212;
+  --surface: #171717;
+  --surface-elevated: #1f1f1f;
+  --indigo-light: #818cf8;
+  --cyan-light: #22d3ee;
+  --slate: #a1a1aa;
+  --slate-dim: #71717a;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.04);
+  --glass-bg: rgba(23, 23, 23, 0.6);
+  --glass-bg-strong: rgba(31, 31, 31, 0.75);
+  --grid-line: rgba(255, 255, 255, 0.03);
+
+  --background: var(--ink);
+  --foreground: var(--paper);
+  --card: var(--glass-bg);
+  --card-foreground: var(--paper);
+  --popover: var(--surface);
+  --popover-foreground: var(--paper);
   --primary: #6366f1;
   --primary-foreground: #ffffff;
   --secondary: #06b6d4;
-  --secondary-foreground: #0a0a0a;
-  --muted: #171717;
-  --muted-foreground: #a1a1aa;
+  --secondary-foreground: var(--ink);
+  --muted: var(--surface);
+  --muted-foreground: var(--slate);
   --accent: #06b6d4;
-  --accent-foreground: #0a0a0a;
+  --accent-foreground: var(--ink);
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: rgba(255, 255, 255, 0.1);
+  --border: var(--glass-border);
+  --input: var(--glass-border);
   --ring: #6366f1;
+
+  color-scheme: dark;
+}
+
+.light {
+  --ink: #fbfbfd;
+  --paper: #0f1115;
+  --charcoal: #f2f2f5;
+  --surface: #ffffff;
+  --surface-elevated: #f4f4f7;
+  --indigo-light: #4f46e5;
+  --cyan-light: #0891b2;
+  --slate: #52525b;
+  --slate-dim: #71717a;
+  --glass-border: rgba(15, 17, 21, 0.1);
+  --glass-highlight: rgba(15, 17, 21, 0.03);
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-strong: rgba(255, 255, 255, 0.85);
+  --grid-line: rgba(15, 17, 21, 0.04);
+
+  color-scheme: light;
 }
 
 @layer base {
@@ -99,20 +137,20 @@
 
   ::selection {
     background-color: var(--color-indigo);
-    color: var(--color-paper);
+    color: #ffffff;
   }
 }
 
 @utility glass {
-  background: rgba(23, 23, 23, 0.6);
+  background: var(--glass-bg);
   backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
 }
 
 @utility glass-strong {
-  background: rgba(31, 31, 31, 0.75);
+  background: var(--glass-bg-strong);
   backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--glass-border);
 }
 
 @utility glow-indigo {
@@ -132,7 +170,8 @@
 
 @utility bg-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
   background-size: 40px 40px;
 }
+
