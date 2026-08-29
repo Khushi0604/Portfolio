@@ -103,9 +103,13 @@ function Index() {
 function Navbar({
   mobileMenuOpen,
   setMobileMenuOpen,
+  theme,
+  toggleTheme,
 }: {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  theme: "dark" | "light";
+  toggleTheme: () => void;
 }) {
   const [scrolled, setScrolled] = useState(false);
 
