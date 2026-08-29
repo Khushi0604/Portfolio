@@ -32,24 +32,19 @@ import {
 } from "../data/portfolio";
 
 
+const DESCRIPTION =
+  "Khushi Nanwani — AI/ML and software engineer graduating Jul 2026, with internship experience in agentic AI, RAG, NLP and data analysis. Open to full-time roles.";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Khushi Nanwani — Software Engineer & AI Engineer" },
-      {
-        name: "description",
-        content:
-          "Portfolio of Khushi Nanwani, a Software Engineer and AI Engineer building intelligent, scalable systems.",
-      },
+      { title: "Khushi Nanwani — AI & Software Engineer Portfolio" },
+      { name: "description", content: DESCRIPTION },
       {
         property: "og:title",
-        content: "Khushi Nanwani — Software Engineer & AI Engineer",
+        content: "Khushi Nanwani — AI & Software Engineer Portfolio",
       },
-      {
-        property: "og:description",
-        content:
-          "Portfolio of Khushi Nanwani, a Software Engineer and AI Engineer building intelligent, scalable systems.",
-      },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -59,14 +54,17 @@ export const Route = createFileRoute("/")({
 
 const navLinks = [
   { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   // Lock body scroll when mobile menu or modal is open.
   useEffect(() => {
@@ -78,13 +76,20 @@ function Index() {
   }, [mobileMenuOpen, activeProject]);
 
   return (
-    <div className="min-h-screen bg-ink font-sans text-paper selection:bg-indigo-500 selection:text-white">
-      <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+    <div className="min-h-screen bg-ink font-sans text-paper">
+      <Navbar
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
       <main>
         <Hero />
         <About />
+        <ExperienceSection />
         <Projects onSelectProject={setActiveProject} />
         <Skills />
+        <EducationSection />
         <Contact />
       </main>
       <Footer />
@@ -93,6 +98,7 @@ function Index() {
     </div>
   );
 }
+
 
 function Navbar({
   mobileMenuOpen,
