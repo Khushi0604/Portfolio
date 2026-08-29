@@ -3,36 +3,48 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
+  Briefcase,
   CheckCircle2,
   Github,
+  GraduationCap,
   Linkedin,
   Mail,
+  MapPin,
   Menu,
+  Moon,
   Send,
+  Sun,
   Twitter,
   X,
 } from "lucide-react";
 
-import { about, contact, hero, personal, projects, skills, type Project } from "../data/portfolio";
+import { useTheme } from "../hooks/use-theme";
+import {
+  about,
+  contact,
+  education,
+  experience,
+  hero,
+  personal,
+  projects,
+  skills,
+  type Project,
+} from "../data/portfolio";
+
+
+const DESCRIPTION =
+  "Khushi Nanwani — AI/ML and software engineer graduating Jul 2026, with internship experience in agentic AI, RAG, NLP and data analysis. Open to full-time roles.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Khushi Nanwani — Software Engineer & AI Engineer" },
-      {
-        name: "description",
-        content:
-          "Portfolio of Khushi Nanwani, a Software Engineer and AI Engineer building intelligent, scalable systems.",
-      },
+      { title: "Khushi Nanwani — AI & Software Engineer Portfolio" },
+      { name: "description", content: DESCRIPTION },
       {
         property: "og:title",
-        content: "Khushi Nanwani — Software Engineer & AI Engineer",
+        content: "Khushi Nanwani — AI & Software Engineer Portfolio",
       },
-      {
-        property: "og:description",
-        content:
-          "Portfolio of Khushi Nanwani, a Software Engineer and AI Engineer building intelligent, scalable systems.",
-      },
+      { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -42,14 +54,17 @@ export const Route = createFileRoute("/")({
 
 const navLinks = [
   { label: "About", href: "#about" },
+  { label: "Experience", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
+  { label: "Education", href: "#education" },
   { label: "Contact", href: "#contact" },
 ];
 
 function Index() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const { theme, toggleTheme } = useTheme();
 
   // Lock body scroll when mobile menu or modal is open.
   useEffect(() => {
@@ -61,13 +76,20 @@ function Index() {
   }, [mobileMenuOpen, activeProject]);
 
   return (
-    <div className="min-h-screen bg-ink font-sans text-paper selection:bg-indigo-500 selection:text-white">
-      <Navbar mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+    <div className="min-h-screen bg-ink font-sans text-paper">
+      <Navbar
+        mobileMenuOpen={mobileMenuOpen}
+        setMobileMenuOpen={setMobileMenuOpen}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
       <main>
         <Hero />
         <About />
+        <ExperienceSection />
         <Projects onSelectProject={setActiveProject} />
         <Skills />
+        <EducationSection />
         <Contact />
       </main>
       <Footer />
@@ -77,12 +99,17 @@ function Index() {
   );
 }
 
+
 function Navbar({
   mobileMenuOpen,
   setMobileMenuOpen,
+  theme,
+  toggleTheme,
 }: {
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  theme: "dark" | "light";
+  toggleTheme: () => void;
 }) {
   const [scrolled, setScrolled] = useState(false);
 
@@ -106,12 +133,12 @@ function Navbar({
           <span className="text-lg font-semibold tracking-tight text-paper">{personal.name}</span>
         </a>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-slate transition-colors hover:text-paper"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-slate transition-colors hover:text-paper"
             >
               {link.label}
             </a>
@@ -119,20 +146,29 @@ function Navbar({
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-glass-border bg-surface/60 text-slate backdrop-blur-sm transition-all hover:border-indigo-500/40 hover:text-paper"
+          >
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
           <a
             href="#contact"
-            className="hidden rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/30 md:inline-flex"
+            className="hidden rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/30 lg:inline-flex"
           >
-            Let's Talk
+            Get in Touch
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-glass-border text-paper md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-glass-border text-paper lg:hidden"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
+
       </div>
     </header>
   );
@@ -142,7 +178,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-30 md:hidden">
+    <div className="fixed inset-0 z-30 lg:hidden">
       <div className="absolute inset-0 bg-ink/95 backdrop-blur-xl" onClick={onClose} />
       <nav className="absolute left-0 right-0 top-16 flex flex-col gap-2 border-b border-glass-border bg-ink/95 p-6 backdrop-blur-xl">
         {navLinks.map((link) => (
@@ -160,8 +196,9 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           onClick={onClose}
           className="mt-2 rounded-lg bg-indigo-500 px-4 py-3 text-center text-base font-semibold text-white"
         >
-          Let's Talk
+          Get in Touch
         </a>
+
       </nav>
     </div>
   );
@@ -180,15 +217,20 @@ function Hero() {
       <div className="relative mx-auto max-w-4xl text-center">
         <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-glass-border bg-surface/50 px-4 py-1.5 text-sm font-medium text-slate backdrop-blur-sm">
           <span className="h-2 w-2 animate-pulse rounded-full bg-cyan-400" />
-          Available for opportunities
+          {hero.badge}
         </p>
         <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-paper sm:text-5xl md:text-6xl lg:text-7xl">
-          Building intelligent systems that{" "}
-          <span className="text-gradient">learn, adapt, and scale.</span>
+          Aspiring <span className="text-gradient">AI &amp; Software Engineer</span> ready to build
+          in a real team.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate md:text-xl">
           {hero.subtitle}
         </p>
+        <p className="mt-5 inline-flex items-center gap-2 text-sm text-slate-dim">
+          <MapPin className="h-4 w-4" />
+          {personal.location}
+        </p>
+
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="#projects"
@@ -218,7 +260,7 @@ function About() {
             About Me
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-paper md:text-4xl">
-            Engineer by training. AI practitioner by curiosity.
+            A final-year student who ships, learns fast, and asks good questions.
           </h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-slate">
             {about.bio.map((paragraph, index) => (
@@ -255,6 +297,89 @@ function About() {
     </section>
   );
 }
+
+function ExperienceSection() {
+  return (
+    <section id="experience" className="px-6 py-24 md:px-10 lg:px-8">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-12">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+            Work Experience
+          </p>
+          <h2 className="text-3xl font-bold tracking-tight text-paper md:text-4xl">
+            Internships where I shipped real work
+          </h2>
+        </div>
+
+        <ol className="relative space-y-6 border-l border-glass-border pl-6 md:pl-8">
+          {experience.map((role) => (
+            <li key={role.company} className="relative">
+              <span className="absolute -left-[31px] top-6 flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-500 bg-ink md:-left-[39px]" />
+              <div className="glass rounded-2xl p-6 transition-transform hover:-translate-y-1">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                  <h3 className="text-lg font-bold text-paper">{role.company}</h3>
+                  <span className="text-sm font-medium text-slate-dim">{role.period}</span>
+                </div>
+                <p className="mt-1 flex flex-wrap items-center gap-2 text-sm font-medium text-indigo-400">
+                  <Briefcase className="h-4 w-4" />
+                  {role.position}
+                  <span className="text-slate-dim">· {role.location}</span>
+                </p>
+                <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate">
+                  {role.points.map((point) => (
+                    <li key={point} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function EducationSection() {
+  return (
+    <section id="education" className="px-6 py-24 md:px-10 lg:px-8">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-12">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+            Education
+          </p>
+          <h2 className="text-3xl font-bold tracking-tight text-paper md:text-4xl">
+            Academic background
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          {education.map((item) => (
+            <div
+              key={item.degree}
+              className="glass flex flex-col gap-2 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex items-start gap-3">
+                <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-indigo-400" />
+                <div>
+                  <h3 className="font-bold text-paper">{item.degree}</h3>
+                  <p className="mt-1 text-sm text-slate">
+                    {item.institution} · {item.location}
+                  </p>
+                </div>
+              </div>
+              <span className="text-sm font-medium text-slate-dim sm:shrink-0">{item.period}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
 
 function Projects({ onSelectProject }: { onSelectProject: (project: Project) => void }) {
   return (
