@@ -260,7 +260,7 @@ function About() {
             About Me
           </p>
           <h2 className="text-3xl font-bold tracking-tight text-paper md:text-4xl">
-            Engineer by training. AI practitioner by curiosity.
+            A final-year student who ships, learns fast, and asks good questions.
           </h2>
           <div className="mt-6 space-y-4 text-base leading-relaxed text-slate">
             {about.bio.map((paragraph, index) => (
