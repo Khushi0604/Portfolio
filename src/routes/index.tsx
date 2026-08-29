@@ -217,15 +217,20 @@ function Hero() {
       <div className="relative mx-auto max-w-4xl text-center">
         <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-glass-border bg-surface/50 px-4 py-1.5 text-sm font-medium text-slate backdrop-blur-sm">
           <span className="h-2 w-2 animate-pulse rounded-full bg-cyan-400" />
-          Available for opportunities
+          {hero.badge}
         </p>
         <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-paper sm:text-5xl md:text-6xl lg:text-7xl">
-          Building intelligent systems that{" "}
-          <span className="text-gradient">learn, adapt, and scale.</span>
+          Aspiring <span className="text-gradient">AI &amp; Software Engineer</span> ready to build
+          in a real team.
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate md:text-xl">
           {hero.subtitle}
         </p>
+        <p className="mt-5 inline-flex items-center gap-2 text-sm text-slate-dim">
+          <MapPin className="h-4 w-4" />
+          {personal.location}
+        </p>
+
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <a
             href="#projects"
