@@ -5,11 +5,11 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system: Institutional Prestige
+ * Design system: Dark Prism
  *
- * A warm, editorial palette built around cream paper, deep ink,
- * oxblood accents, and muted gold highlights. Typography pairs
- * Cormorant Garamond for display with Inter for UI text.
+ * A modern, premium dark portfolio palette built around deep charcoal,
+ * electric indigo, and cyan pulse accents. Glassmorphism cards with
+ * subtle borders and sharp, high-contrast typography.
  */
 
 @theme inline {
@@ -41,62 +41,45 @@
   --color-ring-offset-background: var(--background);
 
   /* Direction-specific tokens */
-  --color-ink: #14110C;
-  --color-paper: #F6F1E7;
-  --color-parchment: #ECE3D2;
-  --color-slate-deep: #273349;
-  --color-oxblood: #6E2421;
-  --color-gold: #9C8249;
-  --color-stone-mute: #6E665A;
-  --color-rule: #D8CDB8;
+  --color-ink: #0a0a0a;
+  --color-paper: #fafafa;
+  --color-charcoal: #121212;
+  --color-surface: #171717;
+  --color-surface-elevated: #1f1f1f;
+  --color-indigo: #6366f1;
+  --color-indigo-light: #818cf8;
+  --color-cyan: #06b6d4;
+  --color-cyan-light: #22d3ee;
+  --color-slate: #a1a1aa;
+  --color-slate-dim: #71717a;
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-glass-highlight: rgba(255, 255, 255, 0.04);
 
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Inter", system-ui, sans-serif;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: #F6F1E7;
-  --foreground: #14110C;
-  --card: #FFFFFF;
-  --card-foreground: #14110C;
-  --popover: #FFFFFF;
-  --popover-foreground: #14110C;
-  --primary: #6E2421;
-  --primary-foreground: #F6F1E7;
-  --secondary: #ECE3D2;
-  --secondary-foreground: #14110C;
-  --muted: #ECE3D2;
-  --muted-foreground: #6E665A;
-  --accent: #9C8249;
-  --accent-foreground: #F6F1E7;
-  --destructive: #6E2421;
-  --destructive-foreground: #F6F1E7;
-  --border: #D8CDB8;
-  --input: #D8CDB8;
-  --ring: #9C8249;
-}
-
-.dark {
-  --background: #14110C;
-  --foreground: #F6F1E7;
-  --card: #273349;
-  --card-foreground: #F6F1E7;
-  --popover: #273349;
-  --popover-foreground: #F6F1E7;
-  --primary: #9C8249;
-  --primary-foreground: #14110C;
-  --secondary: #273349;
-  --secondary-foreground: #F6F1E7;
-  --muted: #273349;
-  --muted-foreground: #D8CDB8;
-  --accent: #6E2421;
-  --accent-foreground: #F6F1E7;
-  --destructive: #6E2421;
-  --destructive-foreground: #F6F1E7;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.15);
-  --ring: #9C8249;
+  --radius: 0.75rem;
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: rgba(23, 23, 23, 0.6);
+  --card-foreground: #fafafa;
+  --popover: #171717;
+  --popover-foreground: #fafafa;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #06b6d4;
+  --secondary-foreground: #0a0a0a;
+  --muted: #171717;
+  --muted-foreground: #a1a1aa;
+  --accent: #06b6d4;
+  --accent-foreground: #0a0a0a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.1);
+  --ring: #6366f1;
 }
 
 @layer base {
@@ -107,9 +90,49 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
 
   html {
     scroll-behavior: smooth;
   }
+
+  ::selection {
+    background-color: var(--color-indigo);
+    color: var(--color-paper);
+  }
+}
+
+@utility glass {
+  background: rgba(23, 23, 23, 0.6);
+  backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@utility glass-strong {
+  background: rgba(31, 31, 31, 0.75);
+  backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@utility glow-indigo {
+  box-shadow: 0 0 24px -4px rgba(99, 102, 241, 0.35);
+}
+
+@utility glow-cyan {
+  box-shadow: 0 0 24px -4px rgba(6, 182, 212, 0.35);
+}
+
+@utility text-gradient {
+  background: linear-gradient(135deg, var(--color-indigo-light), var(--color-cyan-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
 }

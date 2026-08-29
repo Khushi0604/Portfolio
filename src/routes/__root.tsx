@@ -14,17 +14,19 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-paper px-4">
+    <div className="flex min-h-screen items-center justify-center bg-ink px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-serif text-7xl font-medium text-ink">404</h1>
-        <h2 className="mt-4 font-serif text-xl font-semibold text-ink">Page not found</h2>
-        <p className="mt-2 text-sm text-stone-mute">
+        <h1 className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-7xl font-bold text-transparent">
+          404
+        </h1>
+        <h2 className="mt-4 text-xl font-semibold text-paper">Page not found</h2>
+        <p className="mt-2 text-sm text-slate">
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
           <Link
             to="/"
-            className="inline-flex items-center justify-center border border-ink/30 bg-paper px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-paper"
+            className="inline-flex items-center justify-center rounded-lg border border-glass-border bg-surface px-4 py-2 text-sm font-medium text-paper transition-all hover:border-indigo-500/50 hover:bg-surface-elevated"
           >
             Go home
           </Link>
@@ -42,12 +44,12 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   }, [error]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-paper px-4">
+    <div className="flex min-h-screen items-center justify-center bg-ink px-4">
       <div className="max-w-md text-center">
-        <h1 className="font-serif text-xl font-semibold tracking-tight text-ink">
+        <h1 className="text-xl font-semibold tracking-tight text-paper">
           This page didn't load
         </h1>
-        <p className="mt-2 text-sm text-stone-mute">
+        <p className="mt-2 text-sm text-slate">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
@@ -56,13 +58,13 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
               router.invalidate();
               reset();
             }}
-            className="inline-flex items-center justify-center border border-ink/30 bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-ink/90"
+            className="inline-flex items-center justify-center rounded-lg bg-indigo-500 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-indigo-600"
           >
             Try again
           </button>
           <a
             href="/"
-            className="inline-flex items-center justify-center border border-ink/30 bg-paper px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-parchment"
+            className="inline-flex items-center justify-center rounded-lg border border-glass-border bg-surface px-4 py-2 text-sm font-medium text-paper transition-all hover:bg-surface-elevated"
           >
             Go home
           </a>
@@ -77,14 +79,25 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Margaux Ellery — Editorial & Identity Systems" },
-      { name: "description", content: "A portfolio of identity systems, editorial programmes, and typographic foundations for cultural and academic clients." },
-      { name: "author", content: "Margaux Ellery" },
-      { property: "og:title", content: "Margaux Ellery — Editorial & Identity Systems" },
-      { property: "og:description", content: "A portfolio of identity systems, editorial programmes, and typographic foundations for cultural and academic clients." },
+      { title: "Khushi Nanwani — Software Engineer & AI Engineer" },
+      {
+        name: "description",
+        content:
+          "Portfolio of Khushi Nanwani, a Software Engineer and AI Engineer building intelligent, scalable systems.",
+      },
+      { name: "author", content: "Khushi Nanwani" },
+      {
+        property: "og:title",
+        content: "Khushi Nanwani — Software Engineer & AI Engineer",
+      },
+      {
+        property: "og:description",
+        content:
+          "Portfolio of Khushi Nanwani, a Software Engineer and AI Engineer building intelligent, scalable systems.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@margauxellery" },
+      { name: "twitter:site", content: "@khushinanwani" },
     ],
     links: [
       {
@@ -96,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap",
       },
     ],
   }),
