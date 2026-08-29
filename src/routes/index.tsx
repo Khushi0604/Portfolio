@@ -133,12 +133,12 @@ function Navbar({
           <span className="text-lg font-semibold tracking-tight text-paper">{personal.name}</span>
         </a>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-slate transition-colors hover:text-paper"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-slate transition-colors hover:text-paper"
             >
               {link.label}
             </a>
@@ -146,20 +146,29 @@ function Navbar({
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-glass-border bg-surface/60 text-slate backdrop-blur-sm transition-all hover:border-indigo-500/40 hover:text-paper"
+          >
+            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+          </button>
           <a
             href="#contact"
-            className="hidden rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/30 md:inline-flex"
+            className="hidden rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/30 lg:inline-flex"
           >
-            Let's Talk
+            Get in Touch
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-glass-border text-paper md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-glass-border text-paper lg:hidden"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
         </div>
+
       </div>
     </header>
   );
