@@ -3,17 +3,34 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
+  Briefcase,
   CheckCircle2,
   Github,
+  GraduationCap,
   Linkedin,
   Mail,
+  MapPin,
   Menu,
+  Moon,
   Send,
+  Sun,
   Twitter,
   X,
 } from "lucide-react";
 
-import { about, contact, hero, personal, projects, skills, type Project } from "../data/portfolio";
+import { useTheme } from "../hooks/use-theme";
+import {
+  about,
+  contact,
+  education,
+  experience,
+  hero,
+  personal,
+  projects,
+  skills,
+  type Project,
+} from "../data/portfolio";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
