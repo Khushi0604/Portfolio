@@ -298,6 +298,89 @@ function About() {
   );
 }
 
+function ExperienceSection() {
+  return (
+    <section id="experience" className="px-6 py-24 md:px-10 lg:px-8">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-12">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+            Work Experience
+          </p>
+          <h2 className="text-3xl font-bold tracking-tight text-paper md:text-4xl">
+            Internships where I shipped real work
+          </h2>
+        </div>
+
+        <ol className="relative space-y-6 border-l border-glass-border pl-6 md:pl-8">
+          {experience.map((role) => (
+            <li key={role.company} className="relative">
+              <span className="absolute -left-[31px] top-6 flex h-4 w-4 items-center justify-center rounded-full border-2 border-indigo-500 bg-ink md:-left-[39px]" />
+              <div className="glass rounded-2xl p-6 transition-transform hover:-translate-y-1">
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                  <h3 className="text-lg font-bold text-paper">{role.company}</h3>
+                  <span className="text-sm font-medium text-slate-dim">{role.period}</span>
+                </div>
+                <p className="mt-1 flex flex-wrap items-center gap-2 text-sm font-medium text-indigo-400">
+                  <Briefcase className="h-4 w-4" />
+                  {role.position}
+                  <span className="text-slate-dim">· {role.location}</span>
+                </p>
+                <ul className="mt-4 space-y-2 text-sm leading-relaxed text-slate">
+                  {role.points.map((point) => (
+                    <li key={point} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-400" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+function EducationSection() {
+  return (
+    <section id="education" className="px-6 py-24 md:px-10 lg:px-8">
+      <div className="mx-auto max-w-4xl">
+        <div className="mb-12">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-cyan-400">
+            Education
+          </p>
+          <h2 className="text-3xl font-bold tracking-tight text-paper md:text-4xl">
+            Academic background
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          {education.map((item) => (
+            <div
+              key={item.degree}
+              className="glass flex flex-col gap-2 rounded-2xl p-6 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex items-start gap-3">
+                <GraduationCap className="mt-0.5 h-5 w-5 shrink-0 text-indigo-400" />
+                <div>
+                  <h3 className="font-bold text-paper">{item.degree}</h3>
+                  <p className="mt-1 text-sm text-slate">
+                    {item.institution} · {item.location}
+                  </p>
+                </div>
+              </div>
+              <span className="text-sm font-medium text-slate-dim sm:shrink-0">{item.period}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
 function Projects({ onSelectProject }: { onSelectProject: (project: Project) => void }) {
   return (
     <section id="projects" className="px-6 py-24 md:px-10 lg:px-8">
