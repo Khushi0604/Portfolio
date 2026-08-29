@@ -178,7 +178,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-30 md:hidden">
+    <div className="fixed inset-0 z-30 lg:hidden">
       <div className="absolute inset-0 bg-ink/95 backdrop-blur-xl" onClick={onClose} />
       <nav className="absolute left-0 right-0 top-16 flex flex-col gap-2 border-b border-glass-border bg-ink/95 p-6 backdrop-blur-xl">
         {navLinks.map((link) => (
@@ -196,8 +196,9 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           onClick={onClose}
           className="mt-2 rounded-lg bg-indigo-500 px-4 py-3 text-center text-base font-semibold text-white"
         >
-          Let's Talk
+          Get in Touch
         </a>
+
       </nav>
     </div>
   );
