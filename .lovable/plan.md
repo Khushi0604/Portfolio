@@ -53,8 +53,10 @@ Build a responsive, single-page React + Tailwind CSS + TypeScript portfolio with
 - **Stack:** React 19, TanStack Start, Tailwind CSS v4, TypeScript, `lucide-react`.
 - **Routing:** Single-page layout using hash anchors and smooth scroll; no new routes required.
 - **State:** React `useState` for mobile menu, project modal, and contact form state.
+- **Editable Content:** All personal info, projects, skills, and experience highlights will live in a single `src/data/portfolio.ts` file. To update the site locally, you only need to edit that file — no component changes required.
 - **Images:** Use generated placeholder thumbnails that match the indigo/cyan dark-tech mood.
 - **Accessibility:** Focus traps in modal, semantic headings, aria labels on interactive elements.
+- **GitHub Ready:** The project is a standard Vite/TanStack Start repo. You can push it to GitHub as-is; no Lovable-specific lock-in. A short README will note how to install, edit `src/data/portfolio.ts`, and run locally.
 
 ## Deliverables
 - Updated `src/routes/index.tsx` with all sections.
