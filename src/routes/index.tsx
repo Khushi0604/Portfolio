@@ -465,12 +465,12 @@ function Skills() {
 
 function Contact() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [submitted, setSubmitted] = useState(false);
-  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; message?: boolean }>({});
 
   const validate = (values: typeof formState) => {
-    const next: Record<string, string> = {};
+    const next: { name?: string; email?: string; message?: string } = {};
     if (!values.name.trim()) next.name = "Name is required.";
     if (!values.email.trim()) {
       next.email = "Email is required.";
