@@ -2,6 +2,8 @@
 
 A modern, single-page portfolio built with React, TypeScript, TanStack Start, and Tailwind CSS.
 
+To access portfolio, click : "https://khushi-codes.netlify.app/"
+
 ![Portfolio Preview](/public/profile.jpg)
 
 ## Sections
