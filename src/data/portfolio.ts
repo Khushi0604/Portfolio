@@ -35,8 +35,8 @@ export const about = {
   photo: "/profile.jpg",
   highlights: [
     { value: "2", label: "Internships" },
-    { value: "Jul 2026", label: "Graduating" },
-    { value: "AI / ML", label: "Core Focus" },
+    { value: "Jul 2026", label: "Graduated" },
+    { value: "AI / ML and Software Engineering", label: "Core Focus" },
     { value: "Pune", label: "Based In" },
   ],
 };
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     ],
     thumbnail: "/project-fpa-agent.jpg",
     techStack: ["Python", "LangChain", "LangGraph", "FastAPI", "Groq", "FAISS", "Streamlit"],
-    repoUrl: "https://github.com/khushinanwani",
+    repoUrl: "https://github.com/Khushi0604/FpaInsightAgent",
   },
   {
     id: "vision-rag",
@@ -120,7 +120,7 @@ export const projects: Project[] = [
     ],
     thumbnail: "/project-visionrag.jpg",
     techStack: ["Python", "LangChain", "FastAPI", "FAISS", "Whisper", "BLIP", "Groq", "Streamlit"],
-    repoUrl: "https://github.com/khushinanwani",
+    repoUrl: "https://github.com/Khushi0604/VisionRAG",
   },
   {
     id: "video-summarizer",
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     ],
     thumbnail: "/project-video-summarizer.jpg",
     techStack: ["Whisper", "BLIP", "Groq", "FFmpeg", "Streamlit"],
-    repoUrl: "https://github.com/khushinanwani",
+    repoUrl: "https://github.com/Khushi0604/ai-video-summarizer",
   },
 ];
 
@@ -209,7 +209,7 @@ export const education: Education[] = [
 ];
 
 export const contact = {
-  headline: "Looking to hire an AI/ML engineer?",
+  headline: "Let's Connect?",
   subtitle:
-    "I'm graduating in July 2026 and open to full-time roles, internships, and collaborations in AI/ML and software engineering. Send a message and I'll reply within 48 hours.",
+    "Open to full-time roles, internships, and collaborations in AI/ML and software engineering. Send a message and I'll reply within 48 hours.",
 };
