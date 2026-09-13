@@ -592,6 +592,8 @@ function Contact() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; message?: boolean }>({});
 
   const validate = (values: typeof formState) => {
@@ -771,11 +773,18 @@ function Contact() {
                   <p className="mt-1.5 text-sm text-red-400">{errors.message}</p>
                 )}
               </div>
+              {sendError && (
+                <p className="text-sm text-red-400">
+                  Something went wrong sending your message. Please try again, or email me directly
+                  at {personal.email}.
+                </p>
+              )}
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/40"
+                disabled={sending}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/40 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
               >
-                Send Message
+                {sending ? "Sending…" : "Send Message"}
                 <Send className="h-4 w-4" />
               </button>
             </form>
