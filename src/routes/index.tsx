@@ -766,11 +766,17 @@ function Contact() {
                   <p className="mt-1.5 text-sm text-red-400">{errors.message}</p>
                 )}
               </div>
+              {sendError && (
+                <p className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+                  {sendError}
+                </p>
+              )}
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/40"
+                disabled={sending}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/40 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
               >
-                Send Message
+                {sending ? "Sending..." : "Send Message"}
                 <Send className="h-4 w-4" />
               </button>
             </form>
