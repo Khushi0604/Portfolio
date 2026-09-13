@@ -592,6 +592,8 @@ function Contact() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
   const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; message?: boolean }>({});
 
   const validate = (values: typeof formState) => {
@@ -616,17 +618,52 @@ function Contact() {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validation = validate(formState);
     setErrors(validation);
     setTouched({ name: true, email: true, message: true });
+    if (Object.keys(validation).length > 0) return;
 
-    if (Object.keys(validation).length === 0) {
-      setSubmitted(true);
-      setFormState({ name: "", email: "", message: "" });
-      setTouched({});
+    const { name, email, message } = formState;
+
+    if (contact.web3formsAccessKey) {
+      // Deliver the message straight to Khushi's inbox via Web3Forms.
+      setSending(true);
+      setSendError(false);
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: contact.web3formsAccessKey,
+            subject: `Portfolio message from ${name}`,
+            from_name: "Portfolio Contact Form",
+            name,
+            email,
+            message,
+          }),
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.message ?? "Send failed");
+        setSubmitted(true);
+        setFormState({ name: "", email: "", message: "" });
+        setTouched({});
+      } catch {
+        setSendError(true);
+      } finally {
+        setSending(false);
+      }
+      return;
     }
+
+    // Fallback: open the visitor's email app with the message pre-filled.
+    const subject = encodeURIComponent(`Portfolio message from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+    setFormState({ name: "", email: "", message: "" });
+    setTouched({});
   };
 
   return (
@@ -736,11 +773,18 @@ function Contact() {
                   <p className="mt-1.5 text-sm text-red-400">{errors.message}</p>
                 )}
               </div>
+              {sendError && (
+                <p className="text-sm text-red-400">
+                  Something went wrong sending your message. Please try again, or email me directly
+                  at {personal.email}.
+                </p>
+              )}
               <button
                 type="submit"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/40"
+                disabled={sending}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-indigo-500 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5 hover:bg-indigo-600 hover:shadow-indigo-500/40 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
               >
-                Send Message
+                {sending ? "Sending…" : "Send Message"}
                 <Send className="h-4 w-4" />
               </button>
             </form>
