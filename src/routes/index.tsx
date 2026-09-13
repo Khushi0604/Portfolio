@@ -616,17 +616,52 @@ function Contact() {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validation = validate(formState);
     setErrors(validation);
     setTouched({ name: true, email: true, message: true });
+    if (Object.keys(validation).length > 0) return;
 
-    if (Object.keys(validation).length === 0) {
-      setSubmitted(true);
-      setFormState({ name: "", email: "", message: "" });
-      setTouched({});
+    const { name, email, message } = formState;
+
+    if (contact.web3formsAccessKey) {
+      // Deliver the message straight to Khushi's inbox via Web3Forms.
+      setSending(true);
+      setSendError(false);
+      try {
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({
+            access_key: contact.web3formsAccessKey,
+            subject: `Portfolio message from ${name}`,
+            from_name: "Portfolio Contact Form",
+            name,
+            email,
+            message,
+          }),
+        });
+        const result = await res.json();
+        if (!result.success) throw new Error(result.message ?? "Send failed");
+        setSubmitted(true);
+        setFormState({ name: "", email: "", message: "" });
+        setTouched({});
+      } catch {
+        setSendError(true);
+      } finally {
+        setSending(false);
+      }
+      return;
     }
+
+    // Fallback: open the visitor's email app with the message pre-filled.
+    const subject = encodeURIComponent(`Portfolio message from ${name}`);
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+    window.location.href = `mailto:${personal.email}?subject=${subject}&body=${body}`;
+    setSubmitted(true);
+    setFormState({ name: "", email: "", message: "" });
+    setTouched({});
   };
 
   return (
