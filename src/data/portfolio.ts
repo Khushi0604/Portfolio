@@ -212,5 +212,5 @@ export const contact = {
   headline: "Let's Connect?",
   subtitle:
     "Open to full-time roles, internships, and collaborations in AI/ML and software engineering. Send a message and I'll reply within 48 hours.",
-    web3formsAccessKey: "5ad32f65-50cf-47e5-bff2-57e41aeeee87",
+    web3formsAccessKey: "01c43d5c-625d-45a8-970a-0d85b87d502c",
 };
