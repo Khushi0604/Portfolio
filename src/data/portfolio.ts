@@ -212,4 +212,12 @@ export const contact = {
   headline: "Let's Connect?",
   subtitle:
     "Open to full-time roles, internships, and collaborations in AI/ML and software engineering. Send a message and I'll reply within 48 hours.",
+  /**
+   * Contact form delivery (Web3Forms):
+   * 1. Go to https://web3forms.com and enter your email (khushi.nanwani18@gmail.com)
+   * 2. You'll receive an Access Key instantly (free, no account needed)
+   * 3. Paste it below — form submissions will arrive in your inbox
+   * NOTE: this key is safe to publish; it can only send email TO you.
+   */
+  web3formsAccessKey: "PASTE_YOUR_WEB3FORMS_ACCESS_KEY_HERE",
 };

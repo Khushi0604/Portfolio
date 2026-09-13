@@ -616,16 +616,46 @@ function Contact() {
     setTouched((prev) => ({ ...prev, [field]: true }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const validation = validate(formState);
     setErrors(validation);
     setTouched({ name: true, email: true, message: true });
 
-    if (Object.keys(validation).length === 0) {
+    if (Object.keys(validation).length !== 0) return;
+
+    setSending(true);
+    setSendError("");
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: contact.web3formsAccessKey,
+          subject: `Portfolio message from ${formState.name}`,
+          from_name: "Portfolio Contact Form",
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
+      const result = (await response.json()) as { success: boolean; message?: string };
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to send message.");
+      }
       setSubmitted(true);
       setFormState({ name: "", email: "", message: "" });
       setTouched({});
+      setErrors({});
+    } catch {
+      setSendError(
+        "Something went wrong while sending. Please try again or email me directly using the link on the left.",
+      );
+    } finally {
+      setSending(false);
     }
   };
 
