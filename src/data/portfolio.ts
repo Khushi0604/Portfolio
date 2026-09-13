@@ -212,4 +212,8 @@ export const contact = {
   headline: "Let's Connect?",
   subtitle:
     "Open to full-time roles, internships, and collaborations in AI/ML and software engineering. Send a message and I'll reply within 48 hours.",
+  // Free form-delivery key from https://web3forms.com (enter your email there, they send you this key).
+  // Once set, contact-form messages land straight in your inbox — works on any static host.
+  // Leave it empty and the form falls back to opening the visitor's email app instead.
+  web3formsAccessKey: "",
 };
