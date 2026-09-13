@@ -7,19 +7,18 @@
 
 export const personal = {
   name: "Khushi Nanwani",
-  role: "AI / Software Engineer",
-  email: "khushi.nanwani@example.com",
+  role: "Software Engineer",
+  email: "khushi.nanwani18@gmail.com",
   location: "Pune, India",
   resumeUrl: "#", // Replace with a link to your resume PDF (e.g. /Khushi-Nanwani-Resume.pdf)
   social: {
-    github: "https://github.com/khushinanwani",
-    linkedin: "https://linkedin.com/in/khushinanwani",
-    twitter: "https://x.com/khushinanwani",
+    github: "https://github.com/Khushi0604",
+    linkedin: "https://www.linkedin.com/in/khushi-nanwani-734029213/",
   },
 };
 
 export const hero = {
-  badge: "Graduating Jul 2026 · Open to full-time roles",
+  badge: "Graduated in Jul 2026 · Open to full-time roles",
   headline: "AI & Software Engineer",
   subtitle:
     "M.Sc. Computer Applications student in Pune with two software engineering internships and hands-on experience building agentic AI, RAG, and machine learning systems in Python. Looking for a full-time AI/ML or software engineering role.",
