@@ -10,7 +10,7 @@ export const personal = {
   role: "Software Engineer",
   email: "khushi.nanwani18@gmail.com",
   location: "Pune, India",
-  resumeUrl: "#", // Replace with a link to your resume PDF (e.g. /Khushi-Nanwani-Resume.pdf)
+  resumeUrl: "/Khushi Nanwani Resume.pdf", // Replace with a link to your resume PDF (e.g. /Khushi-Nanwani-Resume.pdf)
   social: {
     github: "https://github.com/Khushi0604",
     linkedin: "https://www.linkedin.com/in/khushi-nanwani-734029213/",
@@ -36,7 +36,7 @@ export const about = {
   highlights: [
     { value: "2", label: "Internships" },
     { value: "Jul 2026", label: "Graduated" },
-    { value: "AI / ML and Software Engineering", label: "Core Focus" },
+    { value: "AI / ML ", label: "Core Focus" },
     { value: "Pune", label: "Based In" },
   ],
 };
