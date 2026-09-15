@@ -32,7 +32,7 @@ export const about = {
     "Across two internships I've shipped real work: a formulation and inventory intelligence dashboard with predictive demand estimation, and an AI system for detecting abusive content using OCR and NLP. On my own time I build agentic AI and RAG applications with LangChain, LangGraph, FastAPI, and Groq.",
     "I like problems where data, models, and clean engineering meet — and I learn fastest when I'm building something end to end.",
   ],
-  photo: "/profile.jpg",
+  // photo: "/profile.jpg",
   highlights: [
     { value: "2", label: "Internships" },
     { value: "Jul 2026", label: "Graduated" },
