@@ -281,7 +281,7 @@ function About() {
             ))}
           </div>
         </div>
-        <div className="order-1 flex justify-center lg:order-2">
+        {/* <div className="order-1 flex justify-center lg:order-2">
           <div className="relative">
             <div className="absolute -inset-4 rounded-2xl bg-gradient-to-br from-indigo-500/20 to-cyan-500/20 blur-2xl" />
             <img
@@ -292,7 +292,7 @@ function About() {
               className="relative aspect-square w-72 rounded-2xl object-cover shadow-2xl shadow-black/40 ring-1 ring-glass-border sm:w-80"
             />
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
