@@ -4,7 +4,7 @@ A modern, single-page portfolio built with React, TypeScript, TanStack Start, an
 
 To access portfolio, click : https://khushi-codes.netlify.app/
 
-![Portfolio Preview](/public/profile.jpg)
+<!-- ![Portfolio Preview](/public/profile.jpg)
 
 ## Sections
 
@@ -81,7 +81,7 @@ src/
     __root.tsx           # Root layout, fonts, and metadata
     index.tsx            # Single-page portfolio component
   styles.css             # Theme tokens, glass utilities, and Tailwind config
-```
+``` -->
 
 ## Built with
 
